@@ -2,12 +2,12 @@
   <div>
     <div class="TimerItem">
       <div class="Timer">
-        <div class="Counter">Count</div>
+        <div class="Counter">{{ hour ? `${hour}:` : `` }}{{ min ? `${min}:` : `` }}{{ sec }}</div>
       </div>
       <div class="Control">
-        <div class="Play" v-if="!isPlay" @click="isPlay = !isPlay">Play</div>
-        <div class="Play" v-else @click="isPlay = !isPlay">Stop</div>
-        <div class="Stop">Reset</div>
+        <div class="Start" v-if="!isPlay" @click="Start">Start</div>
+        <div class="Stop" v-else @click="Stop">Stop</div>
+        <div class="Reset" @click="Reset">Reset</div>
       </div>
     </div>
   </div>
@@ -15,10 +15,43 @@
 
 <script>
 export default {
+  props: {
+    timer: {
+      type: Object,
+    },
+  },
   data() {
     return {
       isPlay: false,
+      sec: 50,
+      min: 59,
+      hour: 0,
+      play: null,
     };
+  },
+  methods: {
+    Start() {
+      this.isPlay = !this.isPlay;
+      this.play = setInterval(() => {
+        this.sec++;
+        if (this.sec == 60) {
+          this.sec = 0;
+          this.min++;
+        }
+        if (this.min == 60) {
+          this.sec = this.min =0;
+          this.hour++;
+        }
+      }, 1000);
+    },
+    Stop() {
+      this.isPlay = !this.isPlay;
+      clearInterval(this.play);
+    },
+    Reset() {
+      this.sec = this.min = this.hour = 0;
+      clearInterval(this.play);
+    },
   },
 };
 </script>
@@ -41,7 +74,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 60px;
-    .Stop {
+    .Reset {
       margin-left: 48px;
     }
   }

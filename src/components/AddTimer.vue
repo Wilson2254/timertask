@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button @click="onSubmit"></button>
+    <button @click="onSubmit">Добавить</button>
 </div>
 </template>
 
@@ -8,16 +8,11 @@
 export default {
   methods:{
     onSubmit(){
-
-        const newTodo = {
+        const newTimer = {
           id: Date.now(),
-          title: this.title,
-          completed: false
         }
-        this.$emit('add-todo', newTodo)
-        this.title = ''
+        this.$emit('add-timer', newTimer)
       }
     }
   }
-}
 </script>

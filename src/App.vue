@@ -1,22 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <TimerList />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <AddTimer @add-timer="addTimer" />
+    <TimerList v-if="timers.length" v-bind:timers="timers"/>
+    <p v-else>Нет тамйеров</p>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import TimerList from './components/TimerList.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import TimerList from "./components/TimerList.vue";
+import AddTimer from "./components/AddTimer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld,
-    TimerList
-  }
-}
+    TimerList,
+    AddTimer,
+  },
+  data() {
+    return {
+      timers: [],
+    };
+  },
+  methods: {
+    addTimer(timer) {
+      this.timers.push(timer);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
