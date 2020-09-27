@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="List">
     <TimerItem 
     v-for="timer in timers"
     :key="timer.id"
@@ -18,5 +18,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .List{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 </style>
