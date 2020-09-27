@@ -1,16 +1,15 @@
 <template>
+  <!-- Тут у меня все таймеры -->
   <div class="List">
-    <TimerItem 
-    v-for="timer in timers"
-    :key="timer.id"
-    />
+    <TimerItem v-for="timer in timers" :key="timer.id" />
   </div>
 </template>
 
 <script>
 import TimerItem from "@/components/TimerItem.vue";
 export default {
-  props: ['timers'],
+  // Основной массив в App
+  props: ["timers"],
   components: {
     TimerItem,
   },
@@ -18,9 +17,10 @@ export default {
 </script>
 
 <style lang="scss">
-  .List{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
+// Тут я располагаю таймеры в строчку
+.List {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 </style>

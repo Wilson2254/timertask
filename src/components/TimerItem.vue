@@ -1,12 +1,17 @@
 <template>
   <div>
+    <!-- Основной блок -->
     <div class="TimerItem" v-bind:class="{ TimerItemActive: isPlay }">
+      <!-- Блок с счетчиком -->
       <div class="Timer">
         <div class="Counter">
+          <!-- Вывод цифр как на макете -->
           {{ hour ? `${hour}:` : ``
           }}{{ min ? `${min}:` : !min && hour ? `${min}:` : `` }}{{ sec }}
         </div>
       </div>
+      <!-- Блок с управлением -->
+      <!-- Не успевал вставить иконки, пока оставил текст -->
       <div class="Control">
         <div class="Start" v-if="!isPlay" @click="Start">Start</div>
         <div class="Stop" v-else @click="Stop">Stop</div>
@@ -19,13 +24,14 @@
 <script>
 export default {
   props: {
+    // Наш таймер
     timer: {
       type: Object,
     },
   },
   data() {
-    return {
-      isPlay: false,
+    return {      
+      isPlay: false, //Эта переменная для состояния (тикает или нет)
       sec: 0,
       min: 0,
       hour: 0,
@@ -33,7 +39,9 @@ export default {
   },
   methods: {
     Start() {
+      // Меняю состояние 
       this.isPlay = !this.isPlay;
+      // Каждую секунду меняю цифры
       this.play = setInterval(() => {
         this.sec++;
         if (this.sec == 60) {
@@ -46,11 +54,14 @@ export default {
         }
       }, 1000);
     },
+    // Очищаю таймер и меняю состояние
     Stop() {
       this.isPlay = !this.isPlay;
       clearInterval(this.play);
     },
+    // Вообще все обнуляю
     Reset() {
+      this.isPlay = false;
       this.sec = this.min = this.hour = 0;
       clearInterval(this.play);
     },
@@ -59,6 +70,7 @@ export default {
 </script>
 
 <style lang="scss">
+//Для неактивного таймера
 .TimerItem {
   width: 225px;
   height: 120px;
@@ -89,6 +101,7 @@ export default {
   }
 }
 
+//Для активного таймера
 .TimerItemActive {
   color: white;
   .Timer {

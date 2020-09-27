@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- Вызов добавления таймера -->
+    <!-- Не успевал вставить иконку добавления, оставил текст -->
     <div class="AddTimer" @click="onSubmit">Add</div>
   </div>
 </template>
@@ -8,9 +10,12 @@
 export default {
   methods: {
     onSubmit() {
+      // Создаю новый объект Таймер с айдишкой 
       const newTimer = {
+        // Айдишку просто беру от даты
         id: Date.now(),
       };
+      // Передаю на главный компонент
       this.$emit("add-timer", newTimer);
     },
   },
@@ -28,5 +33,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 </style>
