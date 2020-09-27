@@ -22,6 +22,7 @@ export default {
   width: 225px;
   height: 120px;
   background: #696969;
+   color: #9e9e9e;
   margin: 0 25px;
   margin-bottom: 45px;
   display: flex;

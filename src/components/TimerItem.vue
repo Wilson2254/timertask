@@ -1,8 +1,11 @@
 <template>
   <div>
-    <div class="TimerItem">
+    <div class="TimerItem" v-bind:class="{ TimerItemActive: isPlay }">
       <div class="Timer">
-        <div class="Counter">{{ hour ? `${hour}:` : `` }}{{ min ? `${min}:` : !min && hour ? `${min}:` : `` }}{{ sec }}</div>
+        <div class="Counter">
+          {{ hour ? `${hour}:` : ``
+          }}{{ min ? `${min}:` : !min && hour ? `${min}:` : `` }}{{ sec }}
+        </div>
       </div>
       <div class="Control">
         <div class="Start" v-if="!isPlay" @click="Start">Start</div>
@@ -32,7 +35,7 @@ export default {
     Start() {
       this.isPlay = !this.isPlay;
       this.play = setInterval(() => {
-        this.sec ++;
+        this.sec++;
         if (this.sec == 60) {
           this.sec = 0;
           this.min++;
@@ -62,6 +65,7 @@ export default {
   background: #696969;
   margin: 0 25px;
   margin-bottom: 45px;
+  color: #9e9e9e;
   .Timer {
     border-bottom: 1px solid #9e9e9e;
     height: 60px;
@@ -78,9 +82,17 @@ export default {
       margin-left: 48px;
       cursor: pointer;
     }
-    .Start, .Stop{
+    .Start,
+    .Stop {
       cursor: pointer;
     }
+  }
+}
+
+.TimerItemActive {
+  color: white;
+  .Timer {
+    border-bottom: 1px solid white;
   }
 }
 </style>
